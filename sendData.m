@@ -12,10 +12,11 @@ s.Rate = rate;
 %How many copies of the same number we need
 numcopies = rate/frequency;
 
-%Make that many copies of data
-tiled = repmat(data,numcopies);
+%Make that many copies of data% 
+%tiled = repmat(data,numcopies);
 
-%concatenate column after column
+%concatenate column after column %creates a giant vector that crashes
+%matlab. don't do this
 outdata = reshape(tiled', 1,numel(data))
 
 %Eventually we'll concatenate the outdata with a header here
