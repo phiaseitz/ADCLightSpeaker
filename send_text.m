@@ -1,4 +1,4 @@
-function[text] = send_text(text)
+function[tosend] = send_text(text)
     %Create header of all zeros and then alternating bits
     allzeros = zeros(1,8);
     header = [1 0 1 0 1 0 1 0];

@@ -1,4 +1,4 @@
-function sendData(rate, frequency, data)
+function[sendable] = sendData(rate, frequency, data)
 %NOTE: not actually tested yet -- this might require some debugging
 %Create daq session
 s = daq.createSession('digilent')
@@ -20,6 +20,8 @@ outdata = reshape(tiled', 1,numel(data))
 
 %Eventually we'll concatenate the outdata with a header here
 output = outdata;
+sendable = str2double(cellstr(output'))'
+
 
 % onesarray = 5*ones(rate,1);
 % zerosarray = zeros(rate,1);
