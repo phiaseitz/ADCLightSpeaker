@@ -1,0 +1,6 @@
+function [soundbin, fs] = sound_to_bin()
+    [song,fs] = audioread('song.wav');
+    song = song + 1
+    sound(song,fs)
+soundbin = 1;
+end
