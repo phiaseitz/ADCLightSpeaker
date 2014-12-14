@@ -34,7 +34,7 @@ clf;
 %20 mV @ 3 cm
 %threshold = 100e-3;  
 
-threshold = 50e-3;  %threshold no longer depends on distance b/c LEDS 
+threshold = 125e-3;  %threshold no longer depends on distance b/c LEDS 
 %are turning off fully now
 
 
@@ -42,8 +42,11 @@ threshold = 50e-3;  %threshold no longer depends on distance b/c LEDS
 s = daq.createSession('digilent');
 ch = addAnalogInputChannel(s, 'AD1', 1, 'Voltage');
 
+s.setPowerSupply('positive', 'on');
+s.setPowerSupply('negative', 'on');
+
 %Bit rate, in Hz
-dataRate =50000;
+dataRate =100000;
 
 
 %At least 4 samples per bit is a good idea at 0 distance
@@ -150,4 +153,5 @@ str_bitstr = str_bitstr(1:strcol-endbits);
 %str_bitstr = str_bitstr(1,1:21);
 %str_bitstr = bin2dec(str_bitstr);
 char(bin2dec(reshape(str_bitstr,7,[]).')).'
+
 
