@@ -13,17 +13,17 @@ DAQ.setPowerSupply('negative','on');
 DAQ.Rate = rate;
 
 %define header
-header = [1; 0; 1; 0; 1; 0; 1; 0];
+%header = [1; 0; 1; 0; 1; 0; 1; 0];
 
 %For now, just read in all at once. To send from CSV uncomment
 %data = csvread(datafile);
-%Scale appropriately
-data = 10*data-5;
-
 
 %% Transmit once
+%datatotransmit = vertcat(header,data);
+datatotransmit = data;
+% Scale
+datatotransmit = 10*datatotransmit - 5;
 
-datatotransmit = vertcat(header,data);
 
 queueOutputData(DAQ,datatotransmit);
 
