@@ -1,5 +1,10 @@
 function res = generateRandomHeader(length)
-    header = randi([0 1], length, 1);
-    save('random_header', 'header');
+    header = [1; 0; 1; 0; 1; 0; 1; 0];
+    
+    randomData = randi([0 1], length, 1);
+    
+    randomData = vertcat(header, randomData);
+    
+    save('random_header', 'randomData');
     res = header;
 end
