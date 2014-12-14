@@ -1,8 +1,8 @@
 function sendable = sendNotInPackets(data,rate)
 %Start up the Daq
-
+samplesperbit = 2;
 DAQ = daq.createSession('digilent')
-DAQ.DurationInSeconds =120;
+DAQ.DurationInSeconds =5;
 %This is W1. 
 DAQ.addAnalogOutputChannel('AD1', 1, 'Voltage')
 % Turn on power supplies
@@ -10,7 +10,7 @@ DAQ.setPowerSupply('positive','on');
 DAQ.setPowerSupply('negative','on');
 
 %Set the rate
-DAQ.Rate = rate;
+DAQ.Rate = samplesperbit*rate;
 
 %define header
 %header = [1; 0; 1; 0; 1; 0; 1; 0];
@@ -20,7 +20,10 @@ DAQ.Rate = rate;
 
 %% Transmit once
 %datatotransmit = vertcat(header,data);
-datatotransmit = data;
+dataup = upsample(data,2);
+dataupoff = upsample(data,2,1);
+datatotransmit = dataup + dataupoff;
+
 % Scale
 datatotransmit = 10*datatotransmit - 5;
 
