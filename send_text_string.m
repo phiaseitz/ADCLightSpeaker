@@ -1,4 +1,4 @@
-function sendable = sendNotInPackets(data,rate)
+function sendable = sendNotInPackets(text,rate)
 %Start up the Daq
 samplesperbit = 2;
 DAQ = daq.createSession('digilent')
@@ -17,6 +17,9 @@ DAQ.Rate = samplesperbit*rate;
 
 %For now, just read in all at once. To send from CSV uncomment
 %data = csvread(datafile);
+
+%get binary version of text
+data = string2double(text);
 
 %% Transmit once
 %TO TRANSMIT FROM RANDOM DATA
