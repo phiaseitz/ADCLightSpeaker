@@ -4,9 +4,9 @@ function transfer = findtransferfunc(received, sent)
     % and outputs the estimated transfer function of the channel. We'll
     % have to zoom in to see the actual non-noisy things.
     
-    Ryx = xcorr(y,x)/(x'*x);
+    Ryx = xcorr(received,sent)/(sent'*sent);
     %If we want to plot, we can uncomment this!
-    %plot(Ryx)
+    plot(Ryx)
     
     transfer = Ryx;
 end

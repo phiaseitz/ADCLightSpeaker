@@ -52,7 +52,7 @@ dataRate =100000;
 %At least 4 samples per bit is a good idea at 0 distance
 %10 samples per second @ 50 kHz seems to work, even though we get
 %throttling. Perhaps it's throttling afterward?
-bit_samples = 10;    %samples per bit. 
+bit_samples = 6;    %samples per bit. 
 
 %Set to 4 up to 60k
 %Set to 6 @ 70k
