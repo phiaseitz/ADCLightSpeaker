@@ -34,7 +34,7 @@ clf;
 %20 mV @ 3 cm
 %threshold = 100e-3;  
 
-threshold = 125e-3;  %threshold no longer depends on distance b/c LEDS 
+threshold = 115e-3;  %threshold no longer depends on distance b/c LEDS 
 %are turning off fully now
 
 
