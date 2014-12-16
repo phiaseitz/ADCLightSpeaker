@@ -1,4 +1,4 @@
-function sendable = sendNotInPackets(text,rate)
+function completed = send_text_string(text,rate)
 %Start up the Daq
 samplesperbit = 2;
 DAQ = daq.createSession('digilent')
@@ -42,6 +42,6 @@ DAQ.startForeground;
 
 
 %% Return on completion
-sendable = 1;
+completed = 1;
 
 end
