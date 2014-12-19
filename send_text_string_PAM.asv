@@ -1,0 +1,50 @@
+function transmitted = send_text_string_PAM(text,rate)
+%Start up the Daq
+samplesperbit = 2;
+DAQ = daq.createSession('digilent')
+DAQ.DurationInSeconds =5;
+%This is W1. 
+DAQ.addAnalogOutputChannel('AD1', 1, 'Voltage')
+% Turn on power supplies
+DAQ.setPowerSupply('positive','on');
+DAQ.setPowerSupply('negative','on');
+
+%Set the rate
+DAQ.Rate = samplesperbit*rate;
+
+%define header 
+ header = [5; 0; 5; 0; 5; 0; 5; 0];
+
+%For now, just read in all at once. To send from CSV uncomment
+%data = csvread(datafile);
+
+%get binary version of text
+data = string2double(text);
+
+%% Transmit once
+
+%convert to pam values
+datatotransmit = bin_to_PAM(data);
+
+%Upsample the data
+dataup = upsample(datatotransmit,3);
+dataupoff = upsample(datatotransmit,3,1);
+dataupoffagain = upsample(datatotransmit,3,2);
+datatotransmit = dataup + dataupoff + dataupoffagain;
+
+
+% Scale 
+datatotransmit = 5/(max(datatotransmit))*datatotransmit;
+
+datatotransmit = vertcat(header,datatotransmit);
+
+
+queueOutputData(DAQ,datatotransmit);
+
+DAQ.startForeground;
+
+
+%% Return on completion
+transmitted = datatotransmit;
+
+end
